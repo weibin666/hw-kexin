@@ -41,9 +41,11 @@ class Solution:
     def solve(self, diff: int, arr: list):
         # 使用 set() 将列表转换为集合，以便快速查找元素
         st = set(arr)
-
         # 遍历集合中的每个元素 x，检查是否存在 x + diff 的元素
         # 如果存在，则计数 +1
+        '''
+        学会转换思路：x + diff in st
+        '''
         return sum(1 for x in st if x + diff in st)
 
 

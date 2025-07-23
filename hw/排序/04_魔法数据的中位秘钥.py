@@ -57,7 +57,12 @@ class Solution:
         arr.sort()
 
         # 计算前三分之一的数量，不能整除时向上取整
+        '''
+        学习这种写法：
         k = math.ceil(count / 3)
+        '''
+        k = math.ceil(count / 3)
+
 
         # 取出排好序后的前 k 个元素作为子集
         subset = arr[:k]

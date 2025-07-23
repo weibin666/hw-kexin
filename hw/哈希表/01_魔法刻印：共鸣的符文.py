@@ -24,6 +24,14 @@ moorings
 moo
 
 '''
+
+'''
+2. &= 运算符
+这是 Python 的位与赋值运算符，相当于 min_freq = min_freq & Counter(word)。但对于 Counter 对象，& 运算符有特殊含义。
+
+3. Counter 之间的 & 运算
+当两个 Counter 对象进行 & 运算时，结果是一个新的 Counter，其中包含两个 Counter 中都存在的键，且每个键的值为两者中较小的那个（即取交集并取最小值）。
+'''
 from collections import Counter  # 引入Counter类，用于统计字符频率
 from typing import List  # 引入List类型注解
 
@@ -38,12 +46,19 @@ class Solution:
         # 使用 Counter 统计第一个字符串中每个字符出现的次数
         # Counter 是一个字典子类，专门用于计数
         min_freq = Counter(words[0])
+        print(min_freq)
 
         # 遍历其余的字符串
         for word in words[1:]:
             # 对每个字符串使用 Counter 统计频率
             # 使用“&”操作符取交集，即取每个字符在所有字符串中出现的最小次数
-            min_freq &= Counter(word)
+            min_freq &= Counter(word) # 这种方法正好能将不是共同出现的键值对去掉
+            '''
+            c1 = Counter({'a': 2, 'b': 1})
+            c2 = Counter({'a': 1, 'b': 2, 'c': 3})
+            print(c1 & c2)
+            # 输出: Counter({'a': 1, 'b': 1}) 这种方法正好能将不是共同出现的键值对去掉，比如'c': 3
+            '''
 
         # 初始化结果列表
         result = []
@@ -64,6 +79,6 @@ n = int(input())
 
 # 读取所有魔法卷轴内容，去除前后空白符，存入列表中
 words = [input().strip() for _ in range(n)]
-
+print(words)
 # 调用类方法获取共鸣刻印结果并输出
 print(sol.commonChars(words))

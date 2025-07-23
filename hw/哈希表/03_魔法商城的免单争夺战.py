@@ -50,11 +50,19 @@ from collections import defaultdict
 class Solution:
     def free_order(self, order_time):
         # 创建一个字典，用来记录每秒的最早订单时间（毫秒）
+        '''
+        要熟练使用下面这个方法：
         time_map = defaultdict(list)
-
+        '''
+        time_map = defaultdict(list)
+        '''
+        要熟练使用上面这个方法：
+        time_map = defaultdict(list)
+        '''
         # 遍历订单，按照秒分组
         for order in order_time:
             main_time, ms = order.rsplit(".", 1)
+            print(main_time, ms)
             ms = int(ms)
             time_map[main_time].append(ms)
 

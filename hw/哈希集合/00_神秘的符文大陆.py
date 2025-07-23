@@ -75,11 +75,17 @@ class Solution:
 
         for i, s in enumerate(strings):
             c = Counter(s)  # 统计当前符文卷轴中每个字符的出现次数
+            '''
+            学习！
+            '''
             st = {k for k, v in c.items() if v >= n}  # 筛选出在当前卷轴中出现至少 n 次的字符
 
             if i == 0:
                 res = st  # 如果是第一个卷轴，直接初始化结果集合
             else:
+                '''
+                学习！
+                '''
                 res &= st  # 取交集，确保符文在所有卷轴中都至少出现 n 次
 
         # 如果结果集合非空，则按 ASCII 码升序排序并拼接成字符串返回，否则返回 "null"

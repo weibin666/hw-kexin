@@ -66,6 +66,10 @@ class Solution:
         # 遍历每个城市，对其部门列表进行排序
         for city in city_departments:
             # 排序规则：
+            '''
+            学习这种写法：
+            city_departments[city].sort(key=lambda x: (-x[1], x[0]))
+            '''
             # 1. 先按人数降序排列（-x[1] 表示降序）
             # 2. 若人数相同，则按部门名称字典序升序排列（x[0]）
             city_departments[city].sort(key=lambda x: (-x[1], x[0]))

@@ -62,6 +62,9 @@ from collections import defaultdict
 class Solution:
     def findTopVehicle(self, records: List[str], month: int) -> str:
         # 创建默认字典，值为 [总停留时间, 停留次数]
+        '''
+        defaultdict(lambda: [0, 0]) 定义方法学着点
+        '''
         stats = defaultdict(lambda: [0, 0])
 
         # 用于记录当前最优的车牌号和对应的 [总时间, 次数]
@@ -101,12 +104,53 @@ class Solution:
         # 若未找到符合条件的记录，则输出 NULL
         return best_plate if best_plate is not None else "NULL"
 
+def sovle_v2():
+    from collections import defaultdict
+
+    n = int(input())
+    records = []
+    for _ in range(n):
+        parts = input().split()
+        plate = parts[0]
+        date = parts[1]
+        duration = int(parts[2])
+        records.append((plate, date, duration))
+
+    m = int(input())
+
+    # 筛选目标月份的记录
+    target_records = []
+    for record in records:
+        date_parts = record[1].split('-')
+        month = int(date_parts[1])
+        if month == m:
+            target_records.append(record)
+
+    if not target_records:
+        print("NULL")
+    else:
+        # 统计每个车牌的总停留时间和次数
+        stats = defaultdict(lambda: {'total_duration': 0, 'count': 0})
+        for plate, date, duration in target_records:
+            stats[plate]['total_duration'] += duration
+            stats[plate]['count'] += 1
+
+        # 转换为列表并排序
+        '''
+        这个写法牛逼呀！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+        sorted_stats = sorted(stats.items(), key=lambda x: (-x[1]['total_duration'], -x[1]['count'], x[0]))
+        '''
+        print(stats)
+        sorted_stats = sorted(stats.items(), key=lambda x: (-x[1]['total_duration'], -x[1]['count'], x[0]))
+        print(sorted_stats)
+        print(sorted_stats[0][0])
 
 if __name__ == "__main__":
-    n = int(input())  # 读取记录条数
-    records = [input().strip() for _ in range(n)]  # 读取所有记录
-    month = int(input().strip())  # 读取目标月份
-
-    solution = Solution()
-    result = solution.findTopVehicle(records, month)
-    print(result)
+    # n = int(input())  # 读取记录条数
+    # records = [input().strip() for _ in range(n)]  # 读取所有记录
+    # month = int(input().strip())  # 读取目标月份
+    #
+    # solution = Solution()
+    # result = solution.findTopVehicle(records, month)
+    # print(result)
+    sovle_v2()

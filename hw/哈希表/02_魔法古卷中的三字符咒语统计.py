@@ -53,6 +53,11 @@ class Solution:
 
         # 使用 Counter 统计所有长度为 3 的子串的出现次数
         # s[i:i + 3] 为从索引 i 开始的长度为 3 的子串，i 的范围是 [0, len(s) - 3]
+        '''
+        关键代码如下：
+        c = Counter(s[i:i + 3] for i in range(len(s) - 2))
+        mx = max(c.values())
+        '''
         c = Counter(s[i:i + 3] for i in range(len(s) - 2))
 
         # 计算出出现次数的最大值（即最大频率）

@@ -54,10 +54,10 @@ class Solution:
     def minSeatCompany(self, depts, plans):
         # 外部排序一次，避免多次排序开销
         depts.sort()
-
         def calculate_empty_seats(plan):
             total_empty = 0
             plan.sort()  # 对车型进行排序（每个公司都不同，必须排序）
+            print("plan", plan)
 
             plan_idx = 0
             m = len(plan)
@@ -83,6 +83,28 @@ class Solution:
 
         return best_idx
 
+# 暴力解法
+# class Solution2:
+#     def minSeatCompany(self, depts, plans):
+#         min_empty = float('inf')  # 初始化最小空座数为无穷大
+#         best_idx = -1  # 初始化最优公司编号为-1（表示没有找到）
+
+#         for idx, plan in enumerate(plans):  # 遍历每个租车公司
+#             total_empty = 0  # 记录当前公司的总空座数
+#             for dept in depts:  # 遍历每个部门
+#                 min_seat = float('inf')  # 初始化当前部门的最小空座数为无穷大
+#                 for seat in plan:  # 遍历当前公司的每种车型
+#                     if seat >= dept:  # 如果车型能容纳该部门
+#                         min_seat = min(min_seat, seat - dept)  # 更新最小空座数
+#                 if min_seat == float('inf'):  # 如果没有车型能容纳该部门
+#                     total_empty = -1  # 标记为不可行
+#                     break  # 退出部门循环
+#                 total_empty += min_seat  # 累加空座数
+#             if total_empty != -1 and total_empty < min_empty:  # 如果当前公司可行且空座更少
+#                 min_empty = total_empty  # 更新最小空座数
+#                 best_idx = idx  # 更新最优公司编号
+#         return best_idx  # 返回最优公司编号
+
 
 if __name__ == "__main__":
     # 输入公司部门数和部门人数
@@ -98,7 +120,8 @@ if __name__ == "__main__":
         m = int(input())  # 车型数量
         plan = list(map(int, input().split()))  # 车型载客量
         plans.append(plan)
-
+    print("plans", plans)
+    print("depts", depts)
     # 创建解题对象并调用方法
     solution = Solution()
     result = solution.minSeatCompany(depts, plans)
